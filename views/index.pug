@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div#container
+    input#toggle(type="checkbox", hidden)
+    nav
+      ul#all
+      ul#completed(data-state="completed")
+    main
+      label#hamburger(for="toggle")
+        img(src="assets/menu-icon.png", alt="menu icon")
+      header
+        h1
+      p
+        a#add-new(href="#") &#43 Add new todo
+      table#todos
+

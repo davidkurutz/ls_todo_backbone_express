@@ -1,0 +1,14 @@
+{{#with attributes}}
+<tr id="{{id}}" 
+  {{#if completed}}
+    class="completed"
+    data-state="completed"
+  {{/if}}
+  {{/with}}
+  data-date="{{getDate}}">
+  <td class="main">
+  <a href="#">{{attributes.title}} - {{getDate}}
+  </a>
+  </td>
+  <td class="trash"><img src="assets/trash-bin.png" alt="trash"></td>
+</tr>

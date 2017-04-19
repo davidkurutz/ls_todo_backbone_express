@@ -1,0 +1,20 @@
+include /_mixins
+
+doctype html
+html
+  head
+    title Todo List
+    +stylesheet_link_tag('style')
+    +javascript_include_tag('vendor/all')
+    +javascript_include_tag('handlebars_templates')
+  body
+    block content
+    +javascript_include_tag('application')
+    +javascript_include_tag('models/todos')
+    +javascript_include_tag('collections/todos')
+    +javascript_include_tag('views/todolistview', 'views/modalview', 'views/sidebarview')
+    script(type="text/javascript").
+      App.Todos = new Todos(!{JSON.stringify(todos)});
+      App.current_id = !{JSON.stringify(current_id)};
+      App.init();
+

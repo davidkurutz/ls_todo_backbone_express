@@ -1,0 +1,17 @@
+<ul id="all">
+  <li id="all-todos" class="active">
+  All Todos
+  <div class="count">{{all_total}}</div>
+  </li>
+  {{#each all_list}}
+    {{> par_all_item}}
+  {{/each}}
+</ul>
+<ul id="completed" data-state="completed">
+  <li id="completed-todos">Completed
+    <div class="count">{{comp_total}}</div>
+  </li>
+  {{#each comp_stats}}
+    {{> par_comp_item}}
+  {{/each}}
+</ul>
