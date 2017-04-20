@@ -17,7 +17,6 @@ module.exports = {
     return this.getJSON().current_id
   },
   add: function(todo) {
-    console.log(todo);
     var todos = this.get(),
         current_id = this.current_id();
     

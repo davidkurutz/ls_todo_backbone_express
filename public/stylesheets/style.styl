@@ -1,0 +1,219 @@
+@import "whitespace-reset.css"
+@import "mixins"
+
+body
+  font: normal 300 16px Helvetica, Arial, sans-serif
+  letter-spacing 1px
+  height: 100%
+
+#container
+  height: 100vh
+
+a
+  text-decoration: none
+
+nav
+  width: 335px
+  background: colors.sidebar
+  float: left
+  padding: 60px 0 30px 0
+  box-sizing: border-box
+  height: 100vh
+  overflow: auto
+  ul
+    &:first-child
+      margin-bottom: 40px
+  li
+    padding: 12px 32px 12px 136px
+    color: colors.grey_item
+
+.active, #all-todos.active, #completed-todos.active
+  background-color: colors.sb_active
+  color: colors.white
+
+.active div.count, main div.count
+  background-color: colors.count
+
+/*circular containers for todo count*/
+div.count
+  background: colors.count_unselected
+  width: 16px
+  height: 15px
+  padding: .3em
+  border-radius: 50%
+  text-align: center
+  font-size: 14px
+  float: right
+  margin: -2px 0 0 0
+  color: colors.white
+  line-height: 16px
+  letter-spacing: 0
+
+
+/*navigation headers*/
+#all-todos
+  nav_header('list-icon')
+
+#completed-todos
+  nav_header('checked')
+
+/* main */
+
+main
+  padding: 23px 100px 30px 35px
+  overflow-y: auto
+  height: 100vh
+  box-sizing: border-box
+  div.count
+    float: none
+    display: inline-block
+    vertical-align: 2px
+
+h1
+  font-size: 21px
+  font-weight: 400
+  display: inline-block
+  margin: 0 20px 42px 0
+
+table
+  width: 100%
+  border-collapse: collapse
+  border-spacing: 0
+
+td
+  line-height: 25px
+
+#todos
+  a
+    color: colors.todo
+  td
+    border-top: 1px solid colors.td_border
+    &.main
+      background: transparent url("../assets/small-unchecked.png") 0 20px no-repeat
+      padding: 15px 0 15px 30px
+      width: 100%
+      &:hover
+        background-color: rgba(0,100,200, 0.2)
+  &.trash
+    padding: 10px
+
+
+#todos tr.completed td.main
+  background-image: url("../assets/small-checked.png")
+
+#todos tr.completed a,
+nav li.completed
+  text-decoration: line-through
+  color: colors.grey_item
+
+a#add-new,
+#todos a:hover,
+#todos tr.completed a:hover
+  color: colors.hover
+
+p
+  margin-bottom: 16px
+
+.trash
+  text-align: center
+  &:hover
+    background: colors.trash
+
+#hamburger
+  visibility: hidden
+  padding-bottom: 28px
+  display: block
+
+/*modal and form*/
+div.modal
+  display: none
+  position: fixed
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  background: rgba(0, 0, 0, 0.2)
+
+form
+  background: white
+  z-index: 2
+  width: 576px
+  position: absolute
+  top: 109px
+  left: 50%
+  margin-left: -288px
+  padding: 36px 40px 40px 32px
+  box-sizing: border-box
+
+dl
+  font-size: 0
+
+dt, dd
+  display: inline-block
+  box-sizing: border-box
+  vertical-align: top
+  margin-bottom: 25px
+
+dt
+  width: 110px
+  font-size: 16px
+  padding: 12px 0
+
+dd
+  width: 393px
+  font-size: 0px
+
+span
+  font-size: 16px
+
+input, textarea
+  padding: 10px
+  box-sizing: border-box
+  font-size: 16px
+  width: 100%
+
+textarea
+  resize: none
+
+.date
+  width: 118px
+  margin: 0 6px
+  &:first-child
+    margin-left: 0
+  &:last-child
+    margin-right: 0
+
+select
+  border: 1px solid #e8e8e8
+  font-size: 16px
+  height: 40px
+
+input[type="submit"],
+input[type="button"]
+  button()
+
+input[type="submit"]
+  margin: 0 10px 0 110px
+
+/*media queries*/
+@media (max-width: 768px)
+  nav
+    display: none
+    width: 220px
+
+  nav li, h2
+    padding-left: 54px
+
+  #completed-todos,
+  #all-todos
+    background-position: 18px 10px
+
+  main
+    padding-right: 35px
+  
+  #hamburger
+    visibility: visible
+
+  #toggle:checked + nav
+    display: block
+

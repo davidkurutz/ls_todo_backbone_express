@@ -5,10 +5,6 @@ var express = require('express'),
     Todos = require(path.resolve(path.dirname(__dirname), "local_modules/todos_module"));
 
 module.exports = function(router) {
-  router.get("/todos", function(req, res, next) {
-    res.json(Todos.get());
-  });
-
   router.delete('/todos/:id', function(req, res, next) {
     var id = +req.params.id
     Todos.remove(id);
@@ -37,6 +33,5 @@ module.exports = function(router) {
     Todos.set(todos);
     res.json(todo).end();
   })
-
 }
 

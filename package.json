@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www --ignore 'data'"
+    "start": "nodemon ./bin/www --ignore 'data'",
+    "reset": "cp data/default.json data/todos.json"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -22,6 +23,7 @@
     "grunt-bower-concat": "^1.0.0",
     "grunt-contrib-handlebars": "^1.0.0",
     "grunt-contrib-uglify": "^2.3.0",
-    "grunt-handlebars": "0.0.6"
+    "grunt-handlebars": "0.0.6",
+    "jasmine": "^2.5.3"
   }
 }
