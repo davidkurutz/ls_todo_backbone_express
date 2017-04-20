@@ -14,7 +14,8 @@ var Todos = Backbone.Collection.extend({
     });
   },
   dueDates: function(models) {
-    var dds, unique_array;
+    var dds;
+    var unique_array;
     
     dds = _.sortBy(models, function(a) {
       return new Date(a.get('dateObj')).valueOf();
@@ -25,8 +26,8 @@ var Todos = Backbone.Collection.extend({
     return _.uniq(dds, true);
   },
   getStats: function() {
-    var models = this.models,
-        completed = this.completed();
+    var models = this.models;
+    var completed = this.completed();
 
     return {
       'all_stats' : this.getDueDateStats(models),

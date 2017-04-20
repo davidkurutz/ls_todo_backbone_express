@@ -26,11 +26,11 @@ var ModalView = Backbone.View.extend({
   updateTodo: function(e) {
     e.preventDefault();
 
-    var $target = $(e.target),
-        id = $target.closest("form").find(":hidden").val(),
-        current_todo = App.Todos.get(id);
-        form_data = $target.serializeArray(),
-        new_obj = {},
+    var $target = $(e.target);
+    var id = $target.closest("form").find(":hidden").val();
+    var current_todo = App.Todos.get(id);
+    var form_data = $target.serializeArray();
+    var new_obj = {};
 
     form_data.forEach(function(obj) {
       new_obj[obj.name] = obj.value;
@@ -50,14 +50,14 @@ var ModalView = Backbone.View.extend({
   complete: function(e) {
     e.preventDefault();
 
-    var $f = $(e.target).closest("form"),
-        id,
-        $tr;
+    var $f = $(e.target).closest("form");
+    var id;
+    var $tr;
 
     if ($f.hasClass("new_form")) {
       alert("Item must be created and saved before marked complete");
     } else {
-      id = $f.find(":hidden").val(),
+      id = $f.find(":hidden").val();
       $tr = $("#" + id);
       $(".update_form").trigger("submit");
       $tr.trigger("click");

@@ -10,9 +10,9 @@ var TodoListView = Backbone.View.extend({
     e.preventDefault();
     e.stopPropagation();
 
-    var $tr = $(e.target).closest("tr"),
-        id = $tr.attr("id"),
-        current_todo = this.collection.get(id);
+    var $tr = $(e.target).closest("tr");
+    var id = $tr.attr("id");
+    var current_todo = this.collection.get(id);
 
     current_todo.set('type',"update_form");
     if ($tr.hasClass("completed")) {
@@ -23,9 +23,9 @@ var TodoListView = Backbone.View.extend({
   trash: function(e) {
     e.stopPropagation();
 
-    var $tr = $(e.target).closest('tr'),
-        id = +$tr.attr("id"),
-        collection = this.collection;
+    var $tr = $(e.target).closest('tr');
+    var id = +$tr.attr("id");
+    var collection = this.collection;
 
     $.ajax({
       url: "/todos/" + id,
@@ -33,14 +33,14 @@ var TodoListView = Backbone.View.extend({
       success: function() {
         collection.remove(id);
       }
-    })
+    });
 
   },
   toggleComplete: function(e) {
     e.preventDefault();
-    var id = +$(e.currentTarget).attr("id"),
-        current_todo = this.collection.get(id),
-        c = !current_todo.get('completed');
+    var id = +$(e.currentTarget).attr("id");
+    var current_todo = this.collection.get(id);
+    var c = !current_todo.get('completed');
 
     $.ajax({
       url: "/todos/" + id,
@@ -51,7 +51,7 @@ var TodoListView = Backbone.View.extend({
       success: function(json) {
         current_todo.set(json);
       }
-    })
+    });
   },
   renderList: function(list) {
     var sorted = _.sortBy(_.sortBy(list, function(o) {

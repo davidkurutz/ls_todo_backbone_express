@@ -14,9 +14,9 @@ var SideBarView = Backbone.View.extend({
     $("header h1").html($li.html());
   },
   showFiltered: function(e) {
-    var criteria_obj = App.getCriteriaObj(e),
-        self = this,
-        filtered_list;
+    var criteria_obj = App.getCriteriaObj(e);
+    var self = this;
+    var filtered_list;
 
     filtered_list = this.collection.models.filter(function(item) {
       return Object.keys(criteria_obj).every(function(key) {

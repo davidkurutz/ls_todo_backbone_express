@@ -39,7 +39,7 @@
   });
 
   grunt.registerTask("default", ['bower_concat', 'uglify', 'handlebars']);
-}
+};
 
 function removeWhitespace(template) {
   return template.replace(/ {2,}/mg, "").replace(/\r|\n/mg, "");
