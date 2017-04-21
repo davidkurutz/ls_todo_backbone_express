@@ -2,7 +2,7 @@ var App = {
   templates: JST,
   newTodoModal: function(e) {
     e.preventDefault();
-    var title = "Item " + this.currentId;
+    var title = "Item " + this.current_id;
     new ModalView( { model: { placeholder: title, title: title, type:"new_form"} });
   },
   bind: function() {

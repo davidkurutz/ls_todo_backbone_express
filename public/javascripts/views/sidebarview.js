@@ -30,9 +30,9 @@ var SideBarView = Backbone.View.extend({
   showFiltered: function(e) {
     var criteria_obj = this.getCriteriaObj(e);
     var self = this;
-    var filtered_list;
+    var filteredList;
 
-    filtered_list = this.collection.models.filter(function(item) {
+    filteredList = this.collection.models.filter(function(item) {
       return Object.keys(criteria_obj).every(function(key) {
         if (typeof criteria_obj[key] === "function") {
           return item[key]() === criteria_obj[key]();
@@ -42,15 +42,15 @@ var SideBarView = Backbone.View.extend({
       });
     });
 
-    App.TodoListView.renderList(filtered_list);
+    App.TodoListView.renderList(filteredList);
   },
   render: function() {
     var stats = this.collection.getStats();
     this.$el.html(this.template({
-      all_list: stats.all_stats,
-      all_total: stats.all_total, 
-      comp_stats: stats.comp_stats, 
-      comp_total: stats.comp_total 
+      all_list: stats.allStats,
+      all_total: stats.allTotal, 
+      comp_stats: stats.compStats, 
+      comp_total: stats.compTotal 
     }));
     $("#all-todos").trigger('click');
   },

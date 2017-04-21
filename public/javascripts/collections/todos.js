@@ -4,18 +4,16 @@ var Todos = Backbone.Collection.extend({
     return this.where({ "completed": true });
   },
   getDueDateStats: function(models) {
-    var self = this,
-        dds = this.dueDates(models),
-        count;
+    var dds = this.dueDates(models);
+    var count;
 
-    return dds.map(function(dd) {
-      count = self.totalByDate(dd, models);
+    return dds.map((function(dd) {
+      count = this.totalByDate(dd, models);
       return { date: dd, count: count };
-    });
+    }).bind(this));
   },
   dueDates: function(models) {
     var dds;
-    var unique_array;
     
     dds = _.sortBy(models, function(a) {
       return new Date(a.get('dateObj')).valueOf();
@@ -30,10 +28,10 @@ var Todos = Backbone.Collection.extend({
     var completed = this.completed();
 
     return {
-      'all_stats' : this.getDueDateStats(models),
-      'all_total' : models.length,
-      'comp_stats' : this.getDueDateStats(completed),
-      'comp_total' : completed.length
+      'allStats' : this.getDueDateStats(models),
+      'allTotal' : models.length,
+      'compStats' : this.getDueDateStats(completed),
+      'compTotal' : completed.length
     };
   },
   totalByDate: function(date, collection) {

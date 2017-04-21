@@ -11,15 +11,16 @@ var ModalView = Backbone.View.extend({
   },
   newTodo: function(e) {
     e.preventDefault();
-    var todo_obj = $("form").serializeArray();
+    var todoObj = $("form").serializeArray();
 
     $.ajax({
+      context: this,
       url: "/todos",
       type: "POST",
-      data: todo_obj,
+      data: todoObj,
       success: function(json) {
         App.Todos.add(json);
-        $(".modal").toggle();
+        this.$el.toggle();
       }
     });
   },
@@ -27,30 +28,34 @@ var ModalView = Backbone.View.extend({
     e.preventDefault();
 
     var $target = $(e.target);
-    var id = $target.closest("form").find(":hidden").val();
-    var current_todo = App.Todos.get(id);
-    var form_data = $target.serializeArray();
-    var new_obj = {};
+    var id = this.$("form").find(":hidden").val();
+    var currentTodo = App.Todos.get(id);
+    var formData = $target.serializeArray();
+    var newObj = {};
+    var completed = currentTodo.get('completed');
 
-    form_data.forEach(function(obj) {
-      new_obj[obj.name] = obj.value;
+    formData.forEach(function(obj) {
+      newObj[obj.name] = obj.value;
     });
 
+    newObj.completed = completed
+
     $.ajax({
+      context: this,
       url: "/todos/" + id,
       type: "PUT",
-      data: new_obj,
+      data: newObj,
       success: function(json) {
-        current_todo.set(json);
-        $(".modal").toggle();
-        current_todo.collection.trigger('change');
+        currentTodo.set(json);
+        this.$el.toggle();
+        currentTodo.collection.trigger('change');
       }
     });
   },
   complete: function(e) {
     e.preventDefault();
 
-    var $f = $(e.target).closest("form");
+    var $f = this.$("form");
     var id;
     var $tr;
 
@@ -64,12 +69,14 @@ var ModalView = Backbone.View.extend({
     }
   },
   cancelItem: function(e) {
-    var $modal = $(".modal");
+    var self = this;
 
-    if ($modal[0] !== e.target) {
+    if (this.$el[0] !== e.target) {
       return;
     }
-    $modal.fadeOut(250);
+    this.$el.fadeOut(250, (function() {
+      this.$el.remove();
+    }).bind(this));
   },
   render: function() {
     $(".modal").remove();
