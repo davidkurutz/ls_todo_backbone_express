@@ -2,22 +2,8 @@ var App = {
   templates: JST,
   newTodoModal: function(e) {
     e.preventDefault();
-    var title = "Item " + this.current_id;
+    var title = "Item " + this.currentId;
     new ModalView( { model: { placeholder: title, title: title, type:"new_form"} });
-  },
-  getCriteriaObj: function(e) {
-    var obj = {},
-        date = $(e.target).data().date;
-
-    if (date) {
-      obj.getDate = function() { return date; };
-    }
-
-    if ($(e.target).closest("ul").attr("id") === "completed" ) {
-      obj.completed = true;
-    }
-
-    return obj;
   },
   bind: function() {
     $("#add-new").on("click", this.newTodoModal.bind(this));

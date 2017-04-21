@@ -13,8 +13,22 @@ var SideBarView = Backbone.View.extend({
     $li.addClass("active");
     $("header h1").html($li.html());
   },
+  getCriteriaObj: function(e) {
+    var obj = {},
+        date = $(e.target).data().date;
+
+    if (date) {
+      obj.getDate = function() { return date; };
+    }
+
+    if ($(e.target).closest("ul").attr("id") === "completed" ) {
+      obj.completed = true;
+    }
+
+    return obj;
+  },
   showFiltered: function(e) {
-    var criteria_obj = App.getCriteriaObj(e);
+    var criteria_obj = this.getCriteriaObj(e);
     var self = this;
     var filtered_list;
 

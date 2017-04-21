@@ -1,17 +1,17 @@
 var path = require('path');
 var fs = require('fs');
-var data_path = path.resolve(path.dirname(__dirname), "data/todos.json");
+var dataPath = path.resolve(path.dirname(__dirname), "data/todos.json");
 var _ = require('underscore');
 
 module.exports = {
   getJSON: function() {
-    return JSON.parse(fs.readFileSync(data_path, "utf8"));
+    return JSON.parse(fs.readFileSync(dataPath, "utf8"));
   },
   get: function() {
     return this.getJSON().todos;
   },
   write: function(data) {
-    fs.writeFileSync(data_path, JSON.stringify(data), "utf8");
+    fs.writeFileSync(dataPath, JSON.stringify(data), "utf8");
   },
   current_id: function() {
     return this.getJSON().current_id;
