@@ -13,29 +13,29 @@ module.exports = {
   write: function(data) {
     fs.writeFileSync(dataPath, JSON.stringify(data), "utf8");
   },
-  current_id: function() {
-    return this.getJSON().current_id;
+  currentId: function() {
+    return this.getJSON().currentId;
   },
   add: function(todo) {
     var todos = this.get();
-    var current_id = this.current_id();
+    var currentId = this.currentId();
     
-    todo.id = current_id;
+    todo.id = currentId;
     this.setDate(todo);
 
     todos.push(todo);
-    this.set(todos, current_id + 1);
+    this.set(todos, currentId + 1);
     return todo;
   },
   remove: function(id) {
     var todos = this.get();
-    var current_id = this.current_id();
+    var currentId = this.currentId();
 
     todos = _.reject(todos, function(t) {
       return t.id === id;
     });
 
-    this.set(todos, current_id);
+    this.set(todos, currentId);
   },
   setDate: function(todo) {
     var year = todo.year;
@@ -49,10 +49,10 @@ module.exports = {
   },
   set: function(todos, id) {
     if (!id) {
-      id = this.current_id();
+      id = this.currentId();
     }
     this.write({
-      current_id: id,
+      currentId: id,
       todos: todos
     });
   }

@@ -3,6 +3,17 @@ var Todos = Backbone.Collection.extend({
   completed: function() {
     return this.where({ "completed": true });
   },
+  filterBy: function(criteriaObj) {
+    return this.models.filter(function(item) {
+      return Object.keys(criteriaObj).every(function(key) {
+        if (typeof criteriaObj[key] === "function") {
+          return item[key]() === criteriaObj[key]();
+        } else {
+          return item.get(key) === criteriaObj[key];
+        }
+      });
+    });
+  },
   getDueDateStats: function(models) {
     var dds = this.dueDates(models);
     var count;

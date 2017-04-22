@@ -9,40 +9,29 @@ var SideBarView = Backbone.View.extend({
     e.preventDefault();
     var $li = $(e.currentTarget);
 
-    $li.closest("nav").find(".active").removeClass("active");
+    this.$(".active").removeClass("active");
     $li.addClass("active");
     $("header h1").html($li.html());
   },
   getCriteriaObj: function(e) {
-    var obj = {},
-        date = $(e.target).data().date;
+    var obj = {};
+    var $target = $(e.target);
+    var date = $target.data().date;
 
     if (date) {
       obj.getDate = function() { return date; };
     }
 
-    if ($(e.target).closest("ul").attr("id") === "completed" ) {
+    if ($target.closest("ul").attr("id") === "completed" ) {
       obj.completed = true;
     }
 
     return obj;
   },
   showFiltered: function(e) {
-    var criteria_obj = this.getCriteriaObj(e);
-    var self = this;
-    var filteredList;
-
-    filteredList = this.collection.models.filter(function(item) {
-      return Object.keys(criteria_obj).every(function(key) {
-        if (typeof criteria_obj[key] === "function") {
-          return item[key]() === criteria_obj[key]();
-        } else {
-          return item.get(key) === criteria_obj[key];
-        }
-      });
-    });
-
-    App.TodoListView.renderList(filteredList);
+    var criteriaObj = this.getCriteriaObj(e);
+    var filteredList = this.collection.filterBy(criteriaObj)
+    App.trigger('filter', filteredList);
   },
   render: function() {
     var stats = this.collection.getStats();
@@ -52,7 +41,6 @@ var SideBarView = Backbone.View.extend({
       comp_stats: stats.compStats, 
       comp_total: stats.compTotal 
     }));
-    $("#all-todos").trigger('click');
   },
   initialize: function() {
     this.render();

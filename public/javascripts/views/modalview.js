@@ -11,7 +11,7 @@ var ModalView = Backbone.View.extend({
   },
   newTodo: function(e) {
     e.preventDefault();
-    var todoObj = $("form").serializeArray();
+    var todoObj = this.$("form").serializeArray();
 
     $.ajax({
       context: this,
@@ -19,7 +19,7 @@ var ModalView = Backbone.View.extend({
       type: "POST",
       data: todoObj,
       success: function(json) {
-        App.Todos.add(json);
+        App.trigger('addItem', json);
         this.$el.toggle();
       }
     });
@@ -64,13 +64,11 @@ var ModalView = Backbone.View.extend({
     } else {
       id = $f.find(":hidden").val();
       $tr = $("#" + id);
-      $(".update_form").trigger("submit");
+      this.$(".update_form").trigger("submit");
       $tr.trigger("click");
     }
   },
   cancelItem: function(e) {
-    var self = this;
-
     if (this.$el[0] !== e.target) {
       return;
     }
@@ -79,11 +77,10 @@ var ModalView = Backbone.View.extend({
     }).bind(this));
   },
   render: function() {
-    $(".modal").remove();
     this.$el.html(this.template(this.model));
     $("main").append(this.$el);
-    $(".modal").fadeIn(500);
-    $("#title").focus();
+    this.$el.fadeIn(500);
+    this.$("#title").focus();
   },
   initialize: function() {
     this.render();
