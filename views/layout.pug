@@ -15,6 +15,6 @@ html
     +javascript_include_tag('views/todolistview', 'views/modalview', 'views/sidebarview')
     script(type="text/javascript").
       App.Todos = new Todos(!{JSON.stringify(todos)});
-      App.currentId = !{JSON.stringify(current_id)};
+      App.currentId = !{JSON.stringify(currentId)};
       App.init();
 

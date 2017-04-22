@@ -4,7 +4,7 @@ var App = {
   newTodoModal: function(e) {
     e.preventDefault();
     var title = "Item " + this.currentId;
-    new ModalView( { model: { placeholder: title, title: title, type:"new_form"} });
+    new ModalView( { model: new Todo({ placeholder: title, title: title, type:"new_form"}) });
   },
   init: function() {
     _.extend(this, Backbone.Events);

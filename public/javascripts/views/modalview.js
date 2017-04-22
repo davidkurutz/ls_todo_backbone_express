@@ -13,6 +13,7 @@ var ModalView = Backbone.View.extend({
     e.preventDefault();
     var todoObj = this.$("form").serializeArray();
 
+    console.log(todoObj);
     $.ajax({
       context: this,
       url: "/todos",
@@ -28,7 +29,7 @@ var ModalView = Backbone.View.extend({
     e.preventDefault();
 
     var $target = $(e.target);
-    var id = this.$("form").find(":hidden").val();
+    var id = +this.$("form").find(":hidden").val();
     var currentTodo = App.Todos.get(id);
     var formData = $target.serializeArray();
     var newObj = {};
@@ -77,7 +78,7 @@ var ModalView = Backbone.View.extend({
     }).bind(this));
   },
   render: function() {
-    this.$el.html(this.template(this.model));
+    this.$el.html(this.template(this.model.toJSON()));
     $("main").append(this.$el);
     this.$el.fadeIn(500);
     this.$("#title").focus();

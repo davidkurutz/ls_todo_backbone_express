@@ -7,7 +7,7 @@ module.exports = function(router) {
   router.get('/', function(req, res, next) {
     res.render('index', { 
       todos: Todos.get(),
-      current_id: Todos.currentId()
+      currentId: Todos.currentId()
     });
   });
 };

@@ -15,10 +15,7 @@ var TodoListView = Backbone.View.extend({
     var currentTodo = this.collection.get(id);
 
     currentTodo.set('type',"update_form");
-    if ($tr.hasClass("completed")) {
-      currentTodo.set('completed', true);
-    }
-    new ModalView( { model: currentTodo.toJSON() });
+    new ModalView( { model: currentTodo });
   },
   trash: function(e) {
     e.stopPropagation();
@@ -41,6 +38,7 @@ var TodoListView = Backbone.View.extend({
     var id = +$(e.currentTarget).attr("id");
     var currentTodo = this.collection.get(id);
     var c = !currentTodo.get('completed');
+    console.log(c)
 
     $.ajax({
       url: "/todos/" + id,
