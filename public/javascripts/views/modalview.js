@@ -13,7 +13,6 @@ var ModalView = Backbone.View.extend({
     e.preventDefault();
     var todoObj = this.$("form").serializeArray();
 
-    console.log(todoObj);
     $.ajax({
       context: this,
       url: "/todos",
@@ -38,8 +37,6 @@ var ModalView = Backbone.View.extend({
     formData.forEach(function(obj) {
       newObj[obj.name] = obj.value;
     });
-
-    newObj.completed = completed
 
     $.ajax({
       context: this,
