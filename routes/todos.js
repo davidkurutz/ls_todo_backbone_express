@@ -27,7 +27,6 @@ module.exports = function(router) {
     var todo = _.findWhere(todos, { id: id });
 
     data.completed = data.completed === "true";
-    console.log(data)
     _.extend(todo, data);
 
     Todos.setDate(todo);

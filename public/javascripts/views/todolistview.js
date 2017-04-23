@@ -38,7 +38,6 @@ var TodoListView = Backbone.View.extend({
     var id = +$(e.currentTarget).attr("id");
     var currentTodo = this.collection.get(id);
     var c = !currentTodo.get('completed');
-    console.log(c)
 
     $.ajax({
       url: "/todos/" + id,

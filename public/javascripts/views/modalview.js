@@ -24,19 +24,23 @@ var ModalView = Backbone.View.extend({
       }
     });
   },
+  getUpdateObj: function(data, completed) {
+    var newObj = { completed: completed };
+    
+    data.forEach(function(obj) {
+      newObj[obj.name] = obj.value;
+    });
+
+    return newObj;
+  },
   updateTodo: function(e) {
     e.preventDefault();
 
-    var $target = $(e.target);
-    var id = +this.$("form").find(":hidden").val();
-    var currentTodo = App.Todos.get(id);
-    var formData = $target.serializeArray();
-    var newObj = {};
+    var currentTodo = this.model;
+    var id = currentTodo.get("id");
     var completed = currentTodo.get('completed');
-
-    formData.forEach(function(obj) {
-      newObj[obj.name] = obj.value;
-    });
+    var formData = this.$("form").serializeArray();
+    var newObj = this.getUpdateObj(formData, completed);
 
     $.ajax({
       context: this,
@@ -60,7 +64,7 @@ var ModalView = Backbone.View.extend({
     if ($f.hasClass("new_form")) {
       alert("Item must be created and saved before marked complete");
     } else {
-      id = $f.find(":hidden").val();
+      id = this.model.get("id");
       $tr = $("#" + id);
       this.$(".update_form").trigger("submit");
       $tr.trigger("click");
