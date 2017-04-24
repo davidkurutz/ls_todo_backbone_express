@@ -28,12 +28,24 @@
           partialRegex: /^par_/
         }
       }
+    },
+    jshint: {
+      all: ['Gruntfile.js',
+            'app.js',
+            'routes/*.js',
+            'public/javascripts/models/*.js',
+            'public/javascripts/collections/*.js',
+            'public/javascripts/views/*.js',
+            'public/javascripts/application.js',
+            'local_modules/todos_module.js'
+            ]
     }
   });
 
   [ "grunt-bower-concat",
     "grunt-contrib-uglify",
-    "grunt-contrib-handlebars"
+    "grunt-contrib-handlebars",
+    "grunt-contrib-jshint"
   ].forEach(function(task) {
     grunt.loadNpmTasks(task);
   });
