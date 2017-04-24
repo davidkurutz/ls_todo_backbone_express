@@ -1,3 +1,18 @@
-{{#each todo_item}}
-  {{> par_todo_item}}
-{{/each}}
+<label id="hamburger" for="toggle">
+  <img src="assets/menu-icon.png" alt="menu icon">
+</label>
+<header>
+  <h1>
+    {{header}}
+    <div class="count">{{todo_items.length}}</div>
+  </h1>
+<header>
+<p>
+  <a id="add-new" href="#">&#43 Add new todo</a>
+</p>
+<table id="todos">
+  {{#each todo_items}}
+    {{> par_todo_item}}
+  {{/each}}
+</table>
+
