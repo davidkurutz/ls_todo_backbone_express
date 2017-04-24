@@ -39,7 +39,7 @@ Handlebars.registerPartial("par_todo_item", Handlebars.template({"1":function(co
   return ((stack1 = helpers["with"].call(alias1,(depth0 != null ? depth0.attributes : depth0),{"name":"with","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "data-date=\""
     + alias4(((helper = (helper = helpers.getDate || (depth0 != null ? depth0.getDate : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"getDate","hash":{},"data":data}) : helper)))
-    + "\"><td class=\"main\"><a href=\"#\">"
+    + "\"><td class=\"main\"><a href=\"#\" class=\"edit\">"
     + alias4(container.lambda(((stack1 = (depth0 != null ? depth0.attributes : depth0)) != null ? stack1.title : stack1), depth0))
     + " - "
     + alias4(((helper = (helper = helpers.getDate || (depth0 != null ? depth0.getDate : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"getDate","hash":{},"data":data}) : helper)))
@@ -51,9 +51,15 @@ this["JST"]["main_list"] = Handlebars.template({"1":function(container,depth0,he
 
   return ((stack1 = container.invokePartial(partials.par_todo_item,depth0,{"name":"par_todo_item","data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
+    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=container.escapeExpression;
 
-  return ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.todo_item : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+  return "<label id=\"hamburger\" for=\"toggle\"><img src=\"assets/menu-icon.png\" alt=\"menu icon\"></label><header><h1>"
+    + alias2(((helper = (helper = helpers.header || (depth0 != null ? depth0.header : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"header","hash":{},"data":data}) : helper)))
+    + "<div class=\"count\">"
+    + alias2(container.lambda(((stack1 = (depth0 != null ? depth0.todo_items : depth0)) != null ? stack1.length : stack1), depth0))
+    + "</div></h1><header><p><a id=\"add-new\" href=\"#\">&#43 Add new todo</a></p><table id=\"todos\">"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.todo_items : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</table>";
 },"usePartial":true,"useData":true});
 
 this["JST"]["modal_form"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {

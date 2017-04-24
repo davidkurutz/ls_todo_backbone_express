@@ -7,11 +7,8 @@ var SideBarView = Backbone.View.extend({
   template: App.templates.sb,
   activate: function(e) {
     e.preventDefault();
-    var $li = $(e.currentTarget);
-
     this.$(".active").removeClass("active");
-    $li.addClass("active");
-    $("header h1").html($li.html());
+    $(e.currentTarget).addClass("active");
   },
   getCriteriaObj: function(e) {
     var obj = {};
@@ -29,9 +26,11 @@ var SideBarView = Backbone.View.extend({
     return obj;
   },
   showFiltered: function(e) {
+    var $li = $(e.target);
     var criteriaObj = this.getCriteriaObj(e);
-    var filteredList = this.collection.filterBy(criteriaObj)
-    App.trigger('filter', filteredList);
+    var filteredList = this.collection.filterBy(criteriaObj);
+    var header = $li[0].childNodes[0].data;
+    App.trigger('filter', filteredList, header);
   },
   render: function() {
     var stats = this.collection.getStats();
